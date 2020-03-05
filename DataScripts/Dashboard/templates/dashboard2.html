@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <title>Data Flow Team | Custom graphs</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="static/plugins/fontawesome-free/css/all.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="static/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="static/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Bootstrap!! -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- Plotly!! -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="/contacts" class="nav-link">Contact</a>
+      </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+      <img src="static/dist/img/ecobici-logo.jpg" alt="Ecobici Logo" class="brand-image elevation-3"
+           style="opacity: .8">
+      <span href="/" class="brand-text font-weight-dark">CDMX</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="info">
+          <a href="/contacts" class="d-block">Data Flow Team</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboards
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/dash1" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cyclist Profile</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dash2" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Custom Graphs</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dash3" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bike Stations</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dash4" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Ad Stations</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Custom Graphs</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Custom Graphs</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+        <div class="row mb-2"> 
+          <div class="col-6 mb-3">
+            <label for="gtype">Choose temporality:</label>
+            <select class="custom-select d-block w-100" id="gtype" required>
+                <option value="">Choose...</option>
+                <option value="daily">Total rides: daily</option>
+                <option value="monthly">Total rides: monthly</option>
+                <option value="yearly">Total rides: yearly</option value="yearly">
+                <option value="dayOfWeek">Avg. daily trips: by day of week</option>
+                <option value="monthOfYear">Avg. daily trips: by month</option>
+                <option value="YearOfTime">Avg. daily trips: by year</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid temporality.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="gender">Choose disaggregation:</label>
+            <select class="custom-select d-block w-100" id="disagg" required>
+              <option value="">Choose...</option>
+              <option value="all">All</option>
+              <option value="gender">By gender</option>
+              <option value="age">By age</option>
+              <option value="time">By time of day</option>
+              <option value="length">By trip length</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid aggregation level!
+            </div>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col mb-3">
+            <button class="btn btn-primary btn-lg btn-block" id="buttondash2" type="button">Continue for graph</button>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- MAIN CONTENT!!!!! -->
+    <section class="content">
+      <div id="plot"></div>
+
+
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2014-2019 <a href="/contacts">Data Flow</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 3.0.2-pre
+    </div>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="static/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="static/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="static/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="static/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="static/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="static/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="static/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="static/plugins/moment/moment.min.js"></script>
+<script src="static/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="static/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="static/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="static/dist/js/adminlte.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="/static/js/postgreSQLpassword.js"></script>
+<script src="/static/js/logic_d2.js"></script>
+</body>
+</html>
